@@ -8,4 +8,9 @@ public class EntityView : MonoBehaviour
     {
         EntityController = entityController;
     }
+
+    public virtual void UpdateView()
+    {
+        
+    }
 }
