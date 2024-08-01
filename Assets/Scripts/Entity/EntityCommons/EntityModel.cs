@@ -1,21 +1,16 @@
+using System.Collections.Generic;
+
 public class EntityModel
 {
     protected EntityController EntityController { get; set; }
-    protected float health;
+    protected Dictionary<string, AttributeData> Attributes { get; set; }
     public EntityModel(EntityController entityController)
     {
         EntityController = entityController;
     }
 
-    public float Health
+    public virtual void AddAttribute(AttributeData attributeData)
     {
-        get
-        {
-            return health;
-        }
-        set
-        {
-            health += value;
-        }
+        Attributes.Add(attributeData.AttributeDataName, attributeData);
     }
 }

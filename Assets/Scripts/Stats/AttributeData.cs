@@ -1,20 +1,34 @@
 public class AttributeData
 {
-    protected float m_Value;
+    protected float baseValue;
+    protected float modifiedValue;
+    protected float currentValue;
+    protected string attributeDataName;
     public AttributeData(float value)
     {
-        m_Value = value;
+        baseValue = value;
+        modifiedValue = 0;
+        UpdateCurrentValue(modifiedValue);
     }
 
-    public float Value
+    public float GetValue()
     {
-        get
-        {
-            return m_Value;
-        }
-        set
-        {
-            m_Value = value;
-        }
+        return currentValue;
+    }
+
+    public string AttributeDataName
+    {
+        get { return attributeDataName; }
+    }
+
+    public void ModifyValue(float value)
+    {
+        modifiedValue += value;
+        UpdateCurrentValue(modifiedValue);
+    }
+
+    private void UpdateCurrentValue(float modifiedValue)
+    {
+        currentValue = baseValue + modifiedValue;
     }
 }

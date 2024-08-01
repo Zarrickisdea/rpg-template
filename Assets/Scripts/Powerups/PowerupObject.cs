@@ -1,6 +1,3 @@
-using UnityEngine;
-
-[CreateAssetMenu]
-public class PowerupObject : ScriptableObject
+public class PowerupObject
 {
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityView : MonoBehaviour
+public class EntityView : MonoBehaviour, IAcceptor
 {
     protected EntityController EntityController { get; set; }
 
@@ -10,6 +10,11 @@ public class EntityView : MonoBehaviour
     }
 
     public virtual void UpdateView()
+    {
+
+    }
+
+    public void Accept(IVisitor visitor)
     {
         
     }
