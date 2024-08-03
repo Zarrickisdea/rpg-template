@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityController : MonoBehaviour
+public class EntityController
 {
     protected EntityModel EntityModel { get; set; }
     protected EntityView EntityView { get; set; }

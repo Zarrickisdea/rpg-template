@@ -1,9 +1,16 @@
+using System.Collections.Generic;
+
 public class AttributeObject : IAffected
 {
-    protected AttributeData AttributeData { get; set; }
-    public AttributeObject(AttributeData attributeData)
+    protected List<AttributeData> attributeDatas;
+    public AttributeObject(List<AttributeData> attributeDataList)
     {
-        AttributeData = attributeData;
+        attributeDatas = attributeDataList;
+    }
+
+    public AttributeData GetAttribute(string name)
+    {
+        return attributeDatas.Find(x => x.AttributeDataName == name);
     }
 
     public void ApplyEffect(IAffector affector)

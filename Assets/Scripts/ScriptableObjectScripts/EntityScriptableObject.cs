@@ -1,13 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityScriptableObject : ScriptableObject
 {
     [SerializeField]
-    private GameObject entityObject;
+    private EntityView entityObject;
 
     [SerializeField]
-    private AttributeData attributeData;
+    private List<AttributeData> attributeDataList = new List<AttributeData>();
 
-    public GameObject EntityObject => entityObject;
-    public AttributeData AttributeData => attributeData;
+    public EntityView EntityObject => entityObject;
+    public List<AttributeData> AttributeDataList => attributeDataList;
 }

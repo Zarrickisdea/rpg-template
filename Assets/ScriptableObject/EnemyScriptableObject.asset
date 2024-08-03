@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc143bd0674be894d8347ed7e8c77ef3, type: 3}
   m_Name: EnemyScriptableObject
   m_EditorClassIdentifier: 
-  entityObject: {fileID: 0}
+  entityObject: {fileID: 3965826571578420418, guid: 61fec30822981b94f8844a08301e96cd, type: 3}
+  attributeDataList: []

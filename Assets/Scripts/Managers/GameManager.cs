@@ -28,11 +28,16 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-
+        PlayerView playerView = playerScriptableObject.EntityObject as PlayerView;
+        Instantiate(playerView);
     }
 
     private void SpawnEnemy()
     {
-
+        foreach (EnemyScriptableObject enemyScriptableObject in enemyScriptableObjects)
+        {
+            EnemyView enemyView = enemyScriptableObject.EntityObject as EnemyView;
+            Instantiate(enemyView);
+        }
     }
 }

@@ -1,9 +1,10 @@
+[System.Serializable]
 public class AttributeData
 {
-    protected float baseValue;
-    protected float modifiedValue;
+    public float baseValue;
+    public float modifiedValue;
     protected float currentValue;
-    protected string attributeDataName;
+    public string attributeDataName;
     public AttributeData(float value)
     {
         baseValue = value;

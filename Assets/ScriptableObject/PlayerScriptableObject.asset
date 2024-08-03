@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4588022166c53904f856ffa417aea2b7, type: 3}
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
-  entityObject: {fileID: 0}
+  entityObject: {fileID: 1795742970931104556, guid: c3715f11cf3c19d42b05d1800ea8cc25, type: 3}
+  attributeDataList: []
