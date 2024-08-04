@@ -29,7 +29,13 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer()
     {
         PlayerView playerView = playerScriptableObject.EntityObject as PlayerView;
-        Instantiate(playerView);
+        if (playerView != null)
+        {
+            PlayerController playerController = new PlayerController();
+            PlayerModel playerModel = new PlayerModel();
+            Instantiate(playerView);
+            playerController.InitController();
+        }
     }
 
     private void SpawnEnemy()

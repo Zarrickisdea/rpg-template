@@ -1,23 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public class AttributeObject : IAffected
-{
-    protected List<AttributeData> attributeDatas;
-    public AttributeObject(List<AttributeData> attributeDataList)
-    {
-        attributeDatas = attributeDataList;
-    }
+[CreateAssetMenu(fileName = "AttributeObject", menuName = "AttributeObject", order = 0)]
+public class AttributeObject : ScriptableObject {
+    [SerializeField]
+    private int attributeArchetypeId;
 
-    public AttributeData GetAttribute(string name)
-    {
-        return attributeDatas.Find(x => x.AttributeDataName == name);
-    }
-
-    public void ApplyEffect(IAffector affector)
-    {
-    }
-
-    public void RemoveEffect(IAffector affector)
-    {
-    }
+    [SerializeField]
+    private List<AttributeData> attributeDataList;
 }

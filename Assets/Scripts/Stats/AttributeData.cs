@@ -1,25 +1,49 @@
+using System.Collections.Generic;
+
+public static class AttributeIdCollection
+{
+    public static readonly Dictionary<int, string> AttributeIds = new Dictionary<int, string>()
+    {
+        { 0, "Strength" },
+        { 1, "Dexterity" },
+        { 2, "Constitution" }
+    };
+
+    public static string GetAttributeName(int attributeId)
+    {
+        if (AttributeIds.TryGetValue(attributeId, out string name))
+        {
+            return name;
+        }
+        else
+        {
+            return "Invalid Attribute";
+        }
+    }
+
+    public static void AddAttribute(int attributeId, string name)
+    {
+        //TODO: ADD ATTRIBUTE FUNCTIONALITY
+    }
+}
+
 [System.Serializable]
 public class AttributeData
 {
+    public int attributeId;
     public float baseValue;
-    public float modifiedValue;
+    protected float modifiedValue;
     protected float currentValue;
-    public string attributeDataName;
-    public AttributeData(float value)
-    {
-        baseValue = value;
-        modifiedValue = 0;
-        UpdateCurrentValue(modifiedValue);
-    }
+    protected string attributeDataName;
 
     public float GetValue()
     {
         return currentValue;
     }
 
-    public string AttributeDataName
+    public static string GetAttributeName(int attributeId)
     {
-        get { return attributeDataName; }
+        return AttributeIdCollection.GetAttributeName(attributeId);
     }
 
     public void ModifyValue(float value)

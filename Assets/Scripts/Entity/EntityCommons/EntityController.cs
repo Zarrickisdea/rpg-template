@@ -5,10 +5,13 @@ public class EntityController
     protected EntityModel EntityModel { get; set; }
     protected EntityView EntityView { get; set; }
 
-    public EntityController(EntityModel entityModel, EntityView entityView)
+    public EntityController()
     {
-        EntityModel = entityModel;
-        EntityView = entityView;
+    }
+
+    public virtual void InitController()
+    {
+        
     }
 
     public virtual void TakeDamage(float damage)
