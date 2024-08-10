@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AttributeObject", menuName = "AttributeObject", order = 0)]
+[CreateAssetMenu(fileName = "AttributeObject", menuName = "AttributeObject")]
 public class AttributeObject : ScriptableObject {
-    [SerializeField]
-    private int attributeArchetypeId;
 
     [SerializeField]
-    private List<AttributeData> attributeDataList;
+    private AttributeUniqueId attributeId;
+
+    [SerializeField]
+    private float baseValue;
 }

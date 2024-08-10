@@ -1,47 +1,73 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public static class AttributeIdCollection
+[System.Serializable]
+public record AttributeUniqueId
 {
-    public static readonly Dictionary<int, string> AttributeIds = new Dictionary<int, string>()
+    [SerializeField]
+    private int attributeId;
+    public int AttributeId => attributeId;
+    public AttributeUniqueId(int attributeId)
     {
-        { 0, "Strength" },
-        { 1, "Dexterity" },
-        { 2, "Constitution" }
-    };
-
-    public static string GetAttributeName(int attributeId)
-    {
-        if (AttributeIds.TryGetValue(attributeId, out string name))
+        if (attributeId < 0)
         {
-            return name;
+            throw new System.ArgumentException("AttributeId cannot be negative");
         }
-        else
-        {
-            return "Invalid Attribute";
-        }
-    }
 
-    public static void AddAttribute(int attributeId, string name)
-    {
-        //TODO: ADD ATTRIBUTE FUNCTIONALITY
+        this.attributeId = attributeId;
     }
 }
 
-[System.Serializable]
+public static class AttributeIdCollection
+{
+    private static readonly Dictionary<AttributeUniqueId, string> AttributeIds = new Dictionary<AttributeUniqueId, string>
+    {
+        { new AttributeUniqueId(0), "Strength" },
+        { new AttributeUniqueId(1), "Agility" },
+        { new AttributeUniqueId(2), "Constitution" }
+    };
+
+    public static string GetAttributeName(AttributeUniqueId attributeId)
+    {
+        return AttributeIds.TryGetValue(attributeId, out var name) ? name : "Invalid Attribute";
+    }
+
+    public static bool HasAttribute(AttributeUniqueId attributeId)
+    {
+        return AttributeIds.ContainsKey(attributeId);
+    }
+
+    public static IEnumerable<KeyValuePair<AttributeUniqueId, string>> GetAllAttributes()
+    {
+        return AttributeIds;
+    }
+}
+
 public class AttributeData
 {
-    public int attributeId;
-    public float baseValue;
+    protected AttributeUniqueId attributeId;
+    protected float baseValue;
     protected float modifiedValue;
     protected float currentValue;
-    protected string attributeDataName;
+
+    public AttributeData(AttributeUniqueId attributeId, float baseValue)
+    {
+        if (!AttributeIdCollection.HasAttribute(attributeId))
+        {
+            throw new System.ArgumentException("Invalid attribute id");
+        }
+        this.attributeId = attributeId;
+        this.baseValue = baseValue;
+        modifiedValue = 0;
+        currentValue = baseValue;
+    }
 
     public float GetValue()
     {
         return currentValue;
     }
 
-    public static string GetAttributeName(int attributeId)
+    public static string GetAttributeName(AttributeUniqueId attributeId)
     {
         return AttributeIdCollection.GetAttributeName(attributeId);
     }
