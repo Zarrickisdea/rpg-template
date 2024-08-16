@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
   entityObject: {fileID: 1795742970931104556, guid: c3715f11cf3c19d42b05d1800ea8cc25, type: 3}
-  attributeDataList: []
+  attributeObjects:
+  - {fileID: 11400000, guid: 10573462f0a04814ba9e6011ba5feedf, type: 2}
+  - {fileID: 11400000, guid: cbf47f3e5c297fa409e9c8681516db57, type: 2}
+  - {fileID: 11400000, guid: a2675ae71c6801144bacbb56e53a8763, type: 2}

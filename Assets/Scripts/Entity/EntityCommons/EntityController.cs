@@ -9,9 +9,10 @@ public class EntityController
     {
     }
 
-    public virtual void InitController()
+    public virtual void InitController(EntityView entity, EntityModel entityModel)
     {
-        
+        EntityModel = entityModel;
+        EntityView = entity;
     }
 
     public virtual void TakeDamage(float damage)

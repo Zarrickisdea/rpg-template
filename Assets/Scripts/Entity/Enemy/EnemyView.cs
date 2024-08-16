@@ -1,6 +1,7 @@
 public class EnemyView : EntityView
 {
-    public EnemyView()
+
+    public EnemyView(EnemyController EnemyController) : base(EnemyController)
     {
     }
 }

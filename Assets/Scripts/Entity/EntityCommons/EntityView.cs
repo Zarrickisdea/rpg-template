@@ -4,8 +4,9 @@ public class EntityView : MonoBehaviour, IAcceptor
 {
     protected EntityController EntityController { get; set; }
 
-    public EntityView()
+    public EntityView(EntityController entityController)
     {
+        EntityController = entityController;
     }
 
     public virtual void UpdateView()

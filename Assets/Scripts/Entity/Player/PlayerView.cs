@@ -1,6 +1,6 @@
 public class PlayerView : EntityView
 {
-    public PlayerView()
+    public PlayerView(PlayerController playerController) : base(playerController)
     {
     }
 }

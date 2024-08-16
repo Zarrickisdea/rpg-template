@@ -4,9 +4,10 @@ using System.Collections.Generic;
 public class EntityModel
 {
     protected EntityController EntityController { get; set; }
-    protected AttributeObject attributeObject{ get; set; }
-    public EntityModel()
+    protected List<AttributeData> attributeList{ get; set; }
+    public EntityModel(EntityController entityController, List<AttributeData> attributes)
     {
-        
+        EntityController = entityController;
+        attributeList = attributes;
     }
 }

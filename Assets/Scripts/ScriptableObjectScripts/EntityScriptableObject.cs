@@ -7,15 +7,23 @@ public class EntityScriptableObject : ScriptableObject
     private EntityView entityObject;
 
     [SerializeField]
-    private AttributeObject attributeObject;
+    private List<AttributeObject> attributeObjects;
 
     public EntityView EntityObject
     {
         get { return entityObject; }
     }
 
-    public AttributeObject AttributeObject
+    public List<AttributeData> AttributeObjects
     {
-        get { return attributeObject; }
+        get
+        {
+            List<AttributeData> attributeDataList = new List<AttributeData>();
+            foreach (AttributeObject attributeObject in attributeObjects)
+            {
+                attributeDataList.Add(attributeObject.AttributeData);
+            }
+            return attributeDataList;
+        }
     }
 }

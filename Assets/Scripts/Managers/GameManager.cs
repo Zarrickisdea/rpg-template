@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
         if (playerView != null)
         {
             PlayerController playerController = new PlayerController();
-            PlayerModel playerModel = new PlayerModel();
-            Instantiate(playerView);
-            playerController.InitController();
+            PlayerModel playerModel = new PlayerModel(playerController, playerScriptableObject.AttributeObjects);
+            var playerGameObject = Instantiate(playerView);
+            playerController.InitController(playerGameObject, playerModel);
         }
     }
 
@@ -43,7 +43,13 @@ public class GameManager : MonoBehaviour
         foreach (EnemyScriptableObject enemyScriptableObject in enemyScriptableObjects)
         {
             EnemyView enemyView = enemyScriptableObject.EntityObject as EnemyView;
-            Instantiate(enemyView);
+            if (enemyView != null)
+            {
+                EnemyController enemyController = new EnemyController();
+                EnemyModel enemyModel = new EnemyModel(enemyController, enemyScriptableObject.AttributeObjects);
+                var enemyGameObject = Instantiate(enemyView);
+                enemyController.InitController(enemyGameObject, enemyModel);
+            }
         }
     }
 }
