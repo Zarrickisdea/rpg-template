@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
         if (playerView != null)
         {
             PlayerController playerController = new PlayerController();
-            PlayerModel playerModel = new PlayerModel(playerController, playerScriptableObject.AttributeObjects);
+            var attributeList = new AttributeCollection(playerScriptableObject.AttributeObjects);
+            PlayerModel playerModel = new PlayerModel(playerController, attributeList);
             var playerGameObject = Instantiate(playerView);
             playerController.InitController(playerGameObject, playerModel);
         }
@@ -46,7 +47,8 @@ public class GameManager : MonoBehaviour
             if (enemyView != null)
             {
                 EnemyController enemyController = new EnemyController();
-                EnemyModel enemyModel = new EnemyModel(enemyController, enemyScriptableObject.AttributeObjects);
+                var attributeList = new AttributeCollection(enemyScriptableObject.AttributeObjects);
+                EnemyModel enemyModel = new EnemyModel(enemyController, attributeList);
                 var enemyGameObject = Instantiate(enemyView);
                 enemyController.InitController(enemyGameObject, enemyModel);
             }
