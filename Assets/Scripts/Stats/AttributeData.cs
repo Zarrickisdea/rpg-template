@@ -1,85 +1,47 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public record AttributeUniqueId
+[Serializable]
+public class AttributeUniqueId : IUniqueId<AttributeUniqueId>
 {
-    [SerializeField]
-    private int attributeId;
-    public int AttributeId => attributeId;
-    public AttributeUniqueId(int attributeId)
-    {
-        if (attributeId < 0)
-        {
-            throw new System.ArgumentException("AttributeId cannot be negative");
-        }
-
-        this.attributeId = attributeId;
-    }
+    public AttributeUniqueId(int id): base(id) { }
 }
 
 public static class AttributeIdCollection
 {
-    private static readonly Dictionary<AttributeUniqueId, string> AttributeIds = new Dictionary<AttributeUniqueId, string>
+    static AttributeIdCollection()
     {
-        { new AttributeUniqueId(0), "Strength" },
-        { new AttributeUniqueId(1), "Agility" },
-        { new AttributeUniqueId(2), "Constitution" }
-    };
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(0), "Strength");
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(1), "Dexterity");
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(2), "Constitution");
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(3), "Intelligence");
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(4), "Wisdom");
+        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(5), "Charisma");
+    }
 
     public static string GetAttributeName(AttributeUniqueId attributeId)
     {
-        return AttributeIds.TryGetValue(attributeId, out var name) ? name : "Invalid Attribute";
+        return GenericStaticStatCollection<AttributeUniqueId>.GetValue(attributeId);
+    }
+
+    public static IEnumerable<KeyValuePair<AttributeUniqueId, string>> GetAllIds()
+    {
+        return GenericStaticStatCollection<AttributeUniqueId>.GetAllIds();
     }
 
     public static bool HasAttribute(AttributeUniqueId attributeId)
     {
-        return AttributeIds.ContainsKey(attributeId);
+        return GenericStaticStatCollection<AttributeUniqueId>.HasId(attributeId);
     }
 
-    public static IEnumerable<KeyValuePair<AttributeUniqueId, string>> GetAllAttributes()
+    public static AttributeUniqueId AddAttribute(AttributeUniqueId attributeId, string name)
     {
-        return AttributeIds;
+        return GenericStaticStatCollection<AttributeUniqueId>.AddId(attributeId, name);
     }
 }
 
-public class AttributeData
+public class AttributeData : GenericStatType<AttributeUniqueId>
 {
-    protected AttributeUniqueId attributeId;
-    protected float baseValue;
-    protected float modifiedValue;
-    protected float currentValue;
-
-    public AttributeData(AttributeUniqueId attributeId, float baseValue)
-    {
-        if (!AttributeIdCollection.HasAttribute(attributeId))
-        {
-            throw new System.ArgumentException("Invalid attribute id");
-        }
-        this.attributeId = attributeId;
-        this.baseValue = baseValue;
-        modifiedValue = 0;
-        currentValue = baseValue;
-    }
-
-    public float GetValue()
-    {
-        return currentValue;
-    }
-
-    public static string GetAttributeName(AttributeUniqueId attributeId)
-    {
-        return AttributeIdCollection.GetAttributeName(attributeId);
-    }
-
-    public void ModifyValue(float value)
-    {
-        modifiedValue += value;
-        UpdateCurrentValue(modifiedValue);
-    }
-
-    private void UpdateCurrentValue(float modifiedValue)
-    {
-        currentValue = baseValue + modifiedValue;
-    }
+    public AttributeData(AttributeUniqueId statId, float baseValue) : base(statId, baseValue) { }
 }

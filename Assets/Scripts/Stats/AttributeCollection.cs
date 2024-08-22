@@ -8,4 +8,9 @@ public class AttributeCollection
     {
         this.attributes = attributes;
     }
+
+    public AttributeData GetAttribute(AttributeUniqueId attributeId)
+    {
+        return attributes.Find(a => a.StatId == attributeId);
+    }
 }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: 
   attributeId:
-    attributeId: 0
-  baseValue: 10
+    Id: 0
+  baseValue: 0
