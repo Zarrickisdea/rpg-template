@@ -1,11 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AttributeObject", menuName = "AttributeObject")]
-public class AttributeObject : ScriptableObject 
+public class AttributeObject : ScriptableObject
 {
-    [UniqueIdPropertyDrawer(typeof(AttributeUniqueId))]
     [SerializeField]
-    private SerializableIUniqueId<AttributeUniqueId> attributeId;
+    private AttributeUniqueId attributeId;
 
     [SerializeField]
     private float baseValue;
@@ -14,7 +13,7 @@ public class AttributeObject : ScriptableObject
 
     public AttributeObject()
     {
-        // attributeData = new AttributeData(attributeId.ToUniqueId(), baseValue);
+        attributeData = new AttributeData(attributeId, baseValue);
     }
 
     public AttributeData AttributeData

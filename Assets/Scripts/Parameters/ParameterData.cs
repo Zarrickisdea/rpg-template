@@ -14,6 +14,7 @@ public static class ParameterIdCollection
     {
         GenericStaticStatCollection<ParameterUniqueId>.AddId(new ParameterUniqueId(0), "Health");
         GenericStaticStatCollection<ParameterUniqueId>.AddId(new ParameterUniqueId(1), "Mana");
+        Debug.Log("Parameters Loaded");
     }
 
     public static string GetParameterName(ParameterUniqueId parameterId)

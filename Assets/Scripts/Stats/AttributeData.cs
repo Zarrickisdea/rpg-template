@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class AttributeUniqueId : IUniqueId<AttributeUniqueId>
 {
-    public AttributeUniqueId(int id): base(id) { }
+    public AttributeUniqueId(int id): base(id) {}
 }
 
 public static class AttributeIdCollection
@@ -17,7 +17,7 @@ public static class AttributeIdCollection
         GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(2), "Constitution");
         GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(3), "Intelligence");
         GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(4), "Wisdom");
-        GenericStaticStatCollection<AttributeUniqueId>.AddId(new AttributeUniqueId(5), "Charisma");
+        Debug.Log("Attributes Loaded");
     }
 
     public static string GetAttributeName(AttributeUniqueId attributeId)

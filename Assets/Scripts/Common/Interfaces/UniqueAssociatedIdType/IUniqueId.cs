@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
+[Serializable]
 public class IUniqueId<T>
 {
-    public int Id { get; }
-
+    [SerializeField]
+    public int Id;
     public IUniqueId(int id)
     {
         Id = id;
@@ -47,32 +48,5 @@ public class IUniqueId<T>
     public static bool operator !=(IUniqueId<T> left, T right)
     {
         return !(left == right);
-    }
-}
-
-[Serializable]
-public class SerializableIUniqueId<T> where T : IUniqueId<T>
-{
-    [SerializeField]
-    private int Id;
-
-    public SerializableIUniqueId(int id)
-    {
-        Id = id;
-    }
-
-    public T ToUniqueId()
-    {
-        return (T)Activator.CreateInstance(typeof(T), Id);
-    }
-}
-
-public class UniqueIdPropertyDrawer : PropertyAttribute
-{
-    public Type IdType { get;}
-
-    public UniqueIdPropertyDrawer (Type idType)
-    {
-        IdType = idType;
     }
 }

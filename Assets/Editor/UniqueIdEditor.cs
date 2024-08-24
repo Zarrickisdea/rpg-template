@@ -4,58 +4,77 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(UniqueIdPropertyDrawer))]
-public class BaseUniqueIdDrawer : PropertyDrawer
+public abstract class BaseUniqueIdDrawer<T> : PropertyDrawer where T : IUniqueId<T>
 {
+    private List<KeyValuePair<T, string>> cachedIds;
+
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
 
-        var attribute = this.attribute as UniqueIdPropertyDrawer;
+        // Since Id is a property, not a field, we need to handle it differently
+        int currentId = GetIdValue(property);
 
-        if (attribute == null)
+        if (cachedIds == null)
         {
-            EditorGUI.LabelField(position, label.text, "Missing Unique Id");
+            cachedIds = GetIds().ToList();
+        }
+
+        if (!cachedIds.Any())
+        {
+            Debug.LogWarning($"No Unique Ids found for {typeof(T).Name}.");
+            EditorGUI.LabelField(position, label.text, "No Ids available");
             EditorGUI.EndProperty();
             return;
         }
 
-        var idType = attribute.IdType;
-        var genericCollectionType = typeof(GenericStaticStatCollection<>).MakeGenericType(idType);
-        var getAllIds = genericCollectionType.GetMethod("GetAllIds");
+        string[] options = cachedIds.Select(x => x.Value).ToArray();
+        int[] optionValues = cachedIds.Select(x => x.Key.Id).ToArray();
 
-        if (getAllIds == null)
+        int selectedIndex = Array.IndexOf(optionValues, currentId);
+        selectedIndex = EditorGUI.Popup(position, label.text, selectedIndex, options);
+
+        if (selectedIndex >= 0 && selectedIndex < optionValues.Length)
         {
-            EditorGUI.LabelField(position, label.text, "Missing Get All Ids Method");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        var allIds = getAllIds.Invoke(null, null) as System.Collections.IEnumerable;
-        if (allIds == null)
-        {
-            EditorGUI.LabelField(position, label.text, "Missing All Ids");
-            EditorGUI.EndProperty();
-            return;
-        }
-
-        var options = allIds.Cast<object>().Select(x => (KeyValuePair<IUniqueId<object>, string>)x).ToList();
-
-        string[] displayOptions = options.Select(x => x.Value).ToArray();
-        int[] optionIds = options.Select(x => x.Key.Id).ToArray();
-
-        SerializedProperty idProperty = property.FindPropertyRelative("Id");
-        int currentId = idProperty.intValue;
-        int currentIndex = Array.IndexOf(optionIds, currentId);
-
-        int newIndex = EditorGUI.Popup(position, label.text, currentIndex, displayOptions);
-        if (newIndex != currentIndex && newIndex != -1)
-        {
-            idProperty.intValue = optionIds[newIndex];
+            SetIdValue(property, optionValues[selectedIndex]);
         }
 
         EditorGUI.EndProperty();
     }
+
+    private int GetIdValue(SerializedProperty property)
+    {
+        // Assuming the IUniqueId<T> is the root property itself
+        return property.FindPropertyRelative("Id").intValue;
+    }
+
+    private void SetIdValue(SerializedProperty property, int value)
+    {
+        property.FindPropertyRelative("Id").intValue = value;
+    }
+
+    public abstract IEnumerable<KeyValuePair<T, string>> GetIds();
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return EditorGUIUtility.singleLineHeight;
+    }
 }
 
+[CustomPropertyDrawer(typeof(AttributeUniqueId))]
+public class AttributeUniqueIdDrawer : BaseUniqueIdDrawer<AttributeUniqueId>
+{
+    public override IEnumerable<KeyValuePair<AttributeUniqueId, string>> GetIds()
+    {
+        return AttributeIdCollection.GetAllIds();
+    }
+}
 
+[CustomPropertyDrawer(typeof(ParameterUniqueId))]
+public class ParameterUniqueIdDrawer : BaseUniqueIdDrawer<ParameterUniqueId>
+{
+    public override IEnumerable<KeyValuePair<ParameterUniqueId, string>> GetIds()
+    {
+        return ParameterIdCollection.GetAllIds();
+    }
+}

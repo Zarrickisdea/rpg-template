@@ -3,9 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ParameterObject", menuName = "ParameterObject")]
 public class ParameterObject : ScriptableObject
 {
-    [UniqueIdPropertyDrawer(typeof(ParameterUniqueId))]
     [SerializeField]
-    private SerializableIUniqueId<ParameterUniqueId> parameterId;
+    private ParameterUniqueId parameterId;
 
     [SerializeField]
     private float baseValue;
@@ -14,7 +13,7 @@ public class ParameterObject : ScriptableObject
 
     public ParameterObject()
     {
-        parameterData = new ParameterData(parameterId.ToUniqueId(), baseValue);
+        parameterData = new ParameterData(parameterId, baseValue);
     }
 
     public ParameterData ParameterData

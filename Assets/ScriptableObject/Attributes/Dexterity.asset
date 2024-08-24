@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4652fb4be5902d4e856775c0b2b7c0a, type: 3}
-  m_Name: Strength
+  m_Name: Dexterity
   m_EditorClassIdentifier: 
   attributeId:
-    Id: 0
+    Id: 1
   baseValue: 10
