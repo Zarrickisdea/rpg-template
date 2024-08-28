@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 
-public class ParameterCollection
+public class ParameterCollection : IGenericStatCollection<ParameterUniqueId, ParameterData>
 {
-    private readonly List<ParameterData> parameters = new List<ParameterData>();
+    public ParameterCollection(List<ParameterData> stats) : base(stats) { }
 
-    public ParameterCollection(List<ParameterData> parameters)
+    public override ParameterData GetStat(ParameterUniqueId id)
     {
-        this.parameters = parameters;
-    }
-
-    public ParameterData GetParameter(ParameterUniqueId parameterId)
-    {
-        return parameters.Find(p => p.StatId == parameterId);
+        return stats.Find(stat => stat.StatId == id);
     }
 }

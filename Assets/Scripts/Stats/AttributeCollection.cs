@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 
-public class AttributeCollection
+public class AttributeCollection : IGenericStatCollection<AttributeUniqueId, AttributeData>
 {
-    private readonly List<AttributeData> attributes = new List<AttributeData>();
+    public AttributeCollection(List<AttributeData> stats) : base(stats) { }
 
-    public AttributeCollection(List<AttributeData> attributes)
+    public override AttributeData GetStat(AttributeUniqueId id)
     {
-        this.attributes = attributes;
-    }
-
-    public AttributeData GetAttribute(AttributeUniqueId attributeId)
-    {
-        return attributes.Find(a => a.StatId == attributeId);
+        return stats.Find(stat => stat.StatId == id);
     }
 }

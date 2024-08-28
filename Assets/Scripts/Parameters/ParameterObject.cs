@@ -9,18 +9,11 @@ public class ParameterObject : ScriptableObject
     [SerializeField]
     private float baseValue;
 
-    private ParameterData parameterData;
-
-    public ParameterObject()
-    {
-        parameterData = new ParameterData(parameterId, baseValue);
-    }
-
     public ParameterData ParameterData
     {
         get
         {
-            return parameterData;
+            return new ParameterData(parameterId, baseValue);
         }
     }
 }

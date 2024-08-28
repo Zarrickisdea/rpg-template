@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EntityController
 {
-    protected EntityModel EntityModel { get; set; }
-    protected EntityView EntityView { get; set; }
+    public EntityModel EntityModel;
+    public EntityView EntityView;
 
     public EntityController()
     {
@@ -13,6 +13,8 @@ public class EntityController
     {
         EntityModel = entityModel;
         EntityView = entity;
+
+        Debug.Log("Entity Controller Initialized");
     }
 
     public virtual void TakeDamage(float damage)

@@ -9,18 +9,11 @@ public class AttributeObject : ScriptableObject
     [SerializeField]
     private float baseValue;
 
-    private AttributeData attributeData;
-
-    public AttributeObject()
-    {
-        attributeData = new AttributeData(attributeId, baseValue);
-    }
-
     public AttributeData AttributeData
     {
         get
         {
-            return attributeData;
+            return new AttributeData(attributeId, baseValue);
         }
     }
 }

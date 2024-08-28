@@ -16,6 +16,6 @@ public class EntityView : MonoBehaviour, IAcceptor
 
     public void Accept(IVisitor visitor)
     {
-        
+
     }
 }

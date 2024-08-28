@@ -19,3 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb31a03743bde404a94a8aaacc442cd4, type: 2}
   - {fileID: 11400000, guid: e8e008f696c0db24b9286d789f8025fe, type: 2}
   - {fileID: 11400000, guid: 92bd3b86a68c2c34c8f45e1de13dc8ab, type: 2}
+  parameterObjects:
+  - {fileID: 11400000, guid: a9246486b6992ed4c9c118f56c0e522a, type: 2}
+  - {fileID: 11400000, guid: e9028127035754f4db0a82479af94c83, type: 2}

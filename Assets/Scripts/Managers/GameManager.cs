@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerController playerController = new PlayerController();
             var attributeList = new AttributeCollection(playerScriptableObject.AttributeObjects);
-            PlayerModel playerModel = new PlayerModel(playerController, attributeList);
+            var parameterList = new ParameterCollection(playerScriptableObject.ParameterObjects);
+            PlayerModel playerModel = new PlayerModel(playerController, attributeList, parameterList);
             var playerGameObject = Instantiate(playerView);
             playerController.InitController(playerGameObject, playerModel);
         }
@@ -48,7 +49,8 @@ public class GameManager : MonoBehaviour
             {
                 EnemyController enemyController = new EnemyController();
                 var attributeList = new AttributeCollection(enemyScriptableObject.AttributeObjects);
-                EnemyModel enemyModel = new EnemyModel(enemyController, attributeList);
+                var parameterList = new ParameterCollection(enemyScriptableObject.ParameterObjects);
+                EnemyModel enemyModel = new EnemyModel(enemyController, attributeList, parameterList);
                 var enemyGameObject = Instantiate(enemyView);
                 enemyController.InitController(enemyGameObject, enemyModel);
             }
