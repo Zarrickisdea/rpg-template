@@ -12,7 +12,6 @@ public class EntityModel
         EntityController = entityController;
         attributeList = attributes;
         parameterList = parameters;
-        // Debug.Log(attributeList.GetStat(new AttributeUniqueId(0)).GetValue());
     }
 
     public ParameterCollection GetParameterList()

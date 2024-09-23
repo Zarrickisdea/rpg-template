@@ -13,8 +13,6 @@ public class EntityController
     {
         EntityModel = entityModel;
         EntityView = entity;
-
-        Debug.Log("Entity Controller Initialized");
     }
 
     public virtual void TakeDamage(float damage)

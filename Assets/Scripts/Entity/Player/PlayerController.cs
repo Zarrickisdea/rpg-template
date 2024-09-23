@@ -13,6 +13,8 @@ public class PlayerController : EntityController
 
         Debug.Log("Player Controller Initialized");
 
-        Debug.Log(EntityModel.GetParameterList().GetStat(new ParameterUniqueId(0)).GetValue());
+        Debug.Log(EntityModel);
+
+        Debug.Log(EntityModel.GetParameterList());
     }
 }
